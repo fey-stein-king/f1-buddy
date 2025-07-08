@@ -23,23 +23,57 @@ page = st.sidebar.radio(
 st.title(page)
 
 if page == "💬 Chat with F1 Buddy":
+    from modules.f1_chat import get_girly_response
+
     st.subheader("Ask me anything about Formula 1 💬")
-    st.markdown("I'm here to explain things like DRS, constructors, or why everyone is obsessed with Toto 😘")
-    user_input = st.text_input("What do you wanna ask, boo?")
-    if user_input:
-        st.info("LLM response integration coming soon 👩‍💻✨")
+    st.markdown("From DRS to Monaco drama, I’ve got you babe 💖")
+
+    prompt = st.text_input("What's confusing you, queen?")
+    if prompt:
+        with st.spinner("Spilling the tea..."):
+            answer = get_girly_response(prompt)
+            st.success(answer)
 
 elif page == "📺 Watch & Learn":
-    st.subheader("Iconic F1 Videos 🎥")
-    st.markdown("Coming soon: Search or pick from curated lists like 'Best Team Radios' or 'Monza 2021 Drama'.")
+    from modules.youtube_fetcher import get_youtube_videos
 
-elif page == "🧵 Reddit Trends":
-    st.subheader("Hot F1 Threads 🔥")
-    st.markdown("We’ll pull memes, race reactions, and spicy takes from Reddit. Just wait till you see race day drama.")
+    st.subheader("Iconic F1 Moments 🎥")
+    st.markdown("Search iconic races, overtakes, crashes, or team radios. F1 drama? We’ve got the receipts 🧃")
+
+    query = st.text_input("What do you want to watch?")
+    if query:
+        videos = get_youtube_videos(query)
+        if videos:
+            for video in videos:
+                st.image(video['thumbnail'], width=320)
+                st.markdown(f"**[{video['title']}]({video['link']})**")
+                st.caption(f"⏱ {video['duration']} — 👀 {video['views']}")
+                st.markdown("---")
+        else:
+            st.error("No videos found. Try something like 'Silverstone 2022'")
+
 
 elif page == "🗺️ Track Explorer":
-    st.subheader("Zoom through the circuits 🗺️")
-    st.markdown("Select any track and get its layout, chaos factor, and commentary. It’s like Tinder but for circuits 💅")
+    from modules.track_explorer import load_track_data
+
+    st.subheader("Zoom Through the Circuits 🗺️")
+    st.markdown("Pick a track and I’ll spill the tea 🫖 on laps, chaos, and vibes.")
+
+    df = load_track_data()
+
+    if not df.empty:
+        track = st.selectbox("Choose a track:", df["Track"].tolist())
+        info = df[df["Track"] == track].iloc[0]
+
+        st.markdown(f"""
+        ### 🏁 {track} Grand Prix
+        - 📍 Country: **{info['Country']}**
+        - 🔁 Laps: **{info['Laps']}**
+        - 📏 Circuit Length: **{info['Length_km']} km**
+        - 💬 Commentary: _{info['Commentary']}_
+        """)
+    else:
+        st.error("Couldn't load track info right now 😢")
 
 elif page == "🏆 Driver of the Week":
     from modules.ergast_api import get_top_driver
@@ -60,9 +94,23 @@ elif page == "🏆 Driver of the Week":
 
 
 elif page == "🔮 F1 Astrology":
-    st.subheader("Who’s your F1 soulmate? ✨")
-    st.markdown("Enter your zodiac sign and I’ll match you with your perfect F1 boy 😍")
+    from modules.astrology_utils import match_driver
 
-# Footer
+    st.subheader("F1 Soulmate Matcher 🔮💖")
+    st.markdown("Pick your zodiac and I’ll tell you who on the grid is *literally* your racing soulmate 🏎️✨")
+
+    zodiac = st.selectbox("Choose your sign:", [
+        "Aries", "Taurus", "Gemini", "Cancer", "Leo", "Virgo",
+        "Libra", "Scorpio", "Sagittarius", "Capricorn", "Aquarius", "Pisces"
+    ])
+
+    if st.button("Reveal My F1 Soulmate 💘"):
+        result = match_driver(zodiac)
+        if result:
+            st.success(f"💘 Your match: **{result['Driver']}**")
+            st.markdown(f"_{result['Description']}_")
+        else:
+            st.error("Couldn't find a match... the stars are confused 💫")
+
 st.markdown("---")
 st.caption("Built with 💖 by yours lovingly OM")
