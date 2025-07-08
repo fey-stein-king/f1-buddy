@@ -42,8 +42,22 @@ elif page == "🗺️ Track Explorer":
     st.markdown("Select any track and get its layout, chaos factor, and commentary. It’s like Tinder but for circuits 💅")
 
 elif page == "🏆 Driver of the Week":
+    from modules.ergast_api import get_top_driver
     st.subheader("This Week’s Grid Crush 💘")
-    st.markdown("Real stats + fangirl vibes for one iconic driver. Stats will be pulled using the Ergast API soon!")
+    driver = get_top_driver()
+
+    if driver:
+        st.markdown(f"""
+        ### 🏎️ {driver['name']}  
+        - Team: {driver['constructor']}  
+        - Nationality: {driver['nationality']}  
+        - Current Points: **{driver['points']}**  
+        - Position in Standings: {driver['position']}  
+        """)
+        st.success(f"Totally crushing it right now 😍 {driver['name']} is giving major grid energy!")
+    else:
+        st.error("Couldn’t fetch the data, boo 😭 Try again later.")
+
 
 elif page == "🔮 F1 Astrology":
     st.subheader("Who’s your F1 soulmate? ✨")
@@ -51,4 +65,4 @@ elif page == "🔮 F1 Astrology":
 
 # Footer
 st.markdown("---")
-st.caption("Built with 💖 by your AI pit crew – Powered by Streamlit")
+st.caption("Built with 💖 by yours lovingly OM")
