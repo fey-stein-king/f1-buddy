@@ -1,0 +1,3 @@
+- Did you know? Lewis Hamilton has a bulldog named Roscoe who has his own Instagram.
+- Monaco GP has been won by the pole sitter 75% of the time.
+- Red Bull’s pit crew once did a 1.82-second stop. Blink and it’s over! 👀
