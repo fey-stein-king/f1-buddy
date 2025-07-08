@@ -1,3 +1,10 @@
 - Did you know? Lewis Hamilton has a bulldog named Roscoe who has his own Instagram.
 - Monaco GP has been won by the pole sitter 75% of the time.
 - Red Bull’s pit crew once did a 1.82-second stop. Blink and it’s over! 👀
+- Fernando Alonso made his F1 debut in 2001 — he’s seen it all, queen 👑
+- The Singapore GP is so hot that drivers can lose up to 3kg in sweat! 💦
+- Max Verstappen was the youngest driver to start a race at just 17 years old 🚀
+- The Baku City Circuit has the longest straight in F1 – speed trap central 💥
+- Valtteri Bottas once posed nude in a river for a cycling calendar. Brave. 😳
+- Suzuka is the only F1 track with a figure-8 layout – crossover chaos! 🔄
+- The Halo device has saved multiple lives since being introduced in 2018 🛡️
