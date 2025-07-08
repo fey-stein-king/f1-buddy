@@ -11,7 +11,7 @@ headers = {
 
 def get_girly_response(user_prompt):
     payload = {
-        "model": "mistral-7b-instruct",  # fallback safe model
+       "model": "mistralai/mistral-small-3.2-24b-instruct:free",
         "messages": [
             {
                 "role": "system",
