@@ -11,14 +11,13 @@ headers = {
 
 def get_girly_response(user_prompt):
     payload = {
-       "model": "mistralai/mistral-small-3.2-24b-instruct:free",
+        "model": "mistralai/mistral-small-3.2-24b-instruct:free",
         "messages": [
             {
                 "role": "system",
                 "content": (
-                    "You're an upbeat, girly F1 expert. "
-                    "Use emojis, Gen-Z slang, and explain like you're talking to your bestie "
-                    "who's new to the sport 💖🏁"
+                    "You're an upbeat, girly F1 expert. Use emojis, Gen-Z slang, and explain like you're talking "
+                    "to your bestie who's new to the sport 💖🏁"
                 )
             },
             {"role": "user", "content": user_prompt}
@@ -36,5 +35,5 @@ def get_girly_response(user_prompt):
         return data["choices"][0]["message"]["content"]
 
     except Exception as e:
-        st.error(f"Technical error: {e}")
+        st.error(f"Chat error: {e}")
         return "Oops! I stalled 😭 Try again later, queen."
