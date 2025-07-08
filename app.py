@@ -24,7 +24,6 @@ st.title(page)
 if page == "💬 Chat with F1 Buddy":
     try:
         from modules.f1_chat import get_girly_response
-
         st.subheader("Ask me anything about Formula 1 💬")
         st.markdown("From DRS to Monaco drama, I’ve got you babe 💖")
 
@@ -34,7 +33,7 @@ if page == "💬 Chat with F1 Buddy":
                 answer = get_girly_response(prompt)
                 st.success(answer)
     except Exception as e:
-        st.error("There was an issue loading the chat module 😢")
+        st.error(f"Chat module failed: {e}")
 
 elif page == "📺 Watch & Learn":
     try:
@@ -55,7 +54,7 @@ elif page == "📺 Watch & Learn":
             else:
                 st.error("No videos found. Try something like 'Silverstone 2022'")
     except Exception as e:
-        st.error("There was an issue fetching YouTube videos 😔")
+        st.error(f"Video fetcher failed: {e}")
 
 elif page == "🗺️ Track Explorer":
     try:
@@ -65,7 +64,6 @@ elif page == "🗺️ Track Explorer":
         st.markdown("Pick a track and I’ll spill the tea 🫖 on laps, chaos, and vibes.")
 
         df = load_track_data()
-
         if not df.empty:
             track = st.selectbox("Choose a track:", df["Track"].tolist())
             info = df[df["Track"] == track].iloc[0]
@@ -78,13 +76,14 @@ elif page == "🗺️ Track Explorer":
             - 💬 Commentary: _{info['Commentary']}_
             """)
         else:
-            st.error("Couldn't load track info right now 😢")
+            st.warning("Track data is empty 😢")
     except Exception as e:
-        st.error("Error loading track data 🛠️")
+        st.error(f"Track explorer failed: {e}")
 
 elif page == "🏆 Driver of the Week":
     try:
         from modules.ergast_api import get_top_driver
+
         st.subheader("This Week’s Grid Crush 💘")
         driver = get_top_driver()
 
@@ -98,9 +97,9 @@ elif page == "🏆 Driver of the Week":
             """)
             st.success(f"Totally crushing it right now 😍 {driver['name']} is giving major grid energy!")
         else:
-            st.error("Couldn’t fetch the data, boo 😭 Try again later.")
+            st.warning("Couldn’t fetch the driver data 💔")
     except Exception as e:
-        st.error("Error loading driver stats 🏎️")
+        st.error(f"Driver module failed: {e}")
 
 elif page == "🔮 F1 Astrology":
     try:
@@ -120,9 +119,9 @@ elif page == "🔮 F1 Astrology":
                 st.success(f"💘 Your match: **{result['Driver']}**")
                 st.markdown(f"_{result['Description']}_")
             else:
-                st.error("Couldn't find a match... the stars are confused 💫")
+                st.warning("Couldn't find a match... the stars are confused 💫")
     except Exception as e:
-        st.error("Star maps broken 😭 Astrology module failed.")
+        st.error(f"Astrology module failed: {e}")
 
 st.markdown("---")
 st.caption("Built with 💖 by yours lovingly OM")
