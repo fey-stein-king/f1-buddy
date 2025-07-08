@@ -1,32 +1,54 @@
 import streamlit as st
 
-# Page navigation
-st.set_page_config(page_title="F1 Buddy", page_icon="🏎️", layout="centered")
-st.sidebar.title("💖 F1 Buddy")
-page = st.sidebar.radio("Navigate", ["💬 Chat", "📺 Watch & Learn", "🧵 Reddit Trends", "🗺️ Track Explorer", "🏆 Driver of the Week", "🔮 F1 Astrology"])
+# 🏁 Page Configuration
+st.set_page_config(page_title="F1 Buddy 🏎️💖", layout="wide")
 
-# Main content router
-if page == "💬 Chat":
-    st.header("💬 Chat with F1 Buddy")
-    st.info("Ask me anything about F1 and I’ll spill the tea 🏁💅")
+# 💖 Sidebar Navigation
+st.sidebar.title("F1 Buddy")
+st.sidebar.markdown("Your girly bestie for all things Formula 1 💅🏁")
+
+page = st.sidebar.radio(
+    "Navigate",
+    [
+        "💬 Chat with F1 Buddy",
+        "📺 Watch & Learn",
+        "🧵 Reddit Trends",
+        "🗺️ Track Explorer",
+        "🏆 Driver of the Week",
+        "🔮 F1 Astrology",
+    ]
+)
+
+# 🌐 Page Content Loader
+st.title(page)
+
+if page == "💬 Chat with F1 Buddy":
+    st.subheader("Ask me anything about Formula 1 💬")
+    st.markdown("I'm here to explain things like DRS, constructors, or why everyone is obsessed with Toto 😘")
+    user_input = st.text_input("What do you wanna ask, boo?")
+    if user_input:
+        st.info("LLM response integration coming soon 👩‍💻✨")
 
 elif page == "📺 Watch & Learn":
-    st.header("📺 Watch Iconic F1 Moments")
-    st.warning("Coming soon: auto YouTube fetch for crashes, comebacks & chaos.")
+    st.subheader("Iconic F1 Videos 🎥")
+    st.markdown("Coming soon: Search or pick from curated lists like 'Best Team Radios' or 'Monza 2021 Drama'.")
 
 elif page == "🧵 Reddit Trends":
-    st.header("🧵 What’s Hot on r/formula1")
-    st.warning("Reddit memes and race day drama loading...")
+    st.subheader("Hot F1 Threads 🔥")
+    st.markdown("We’ll pull memes, race reactions, and spicy takes from Reddit. Just wait till you see race day drama.")
 
 elif page == "🗺️ Track Explorer":
-    st.header("🗺️ Explore F1 Circuits")
-    st.warning("Track maps and commentary coming next.")
+    st.subheader("Zoom through the circuits 🗺️")
+    st.markdown("Select any track and get its layout, chaos factor, and commentary. It’s like Tinder but for circuits 💅")
 
 elif page == "🏆 Driver of the Week":
-    st.header("🏆 Your Weekly F1 Crush")
-    st.warning("Live driver stats via Ergast API soon!")
+    st.subheader("This Week’s Grid Crush 💘")
+    st.markdown("Real stats + fangirl vibes for one iconic driver. Stats will be pulled using the Ergast API soon!")
 
 elif page == "🔮 F1 Astrology":
-    st.header("🔮 Who’s Your F1 Soulmate?")
-    st.warning("Enter your zodiac sign and get matched with your grid bestie.")
+    st.subheader("Who’s your F1 soulmate? ✨")
+    st.markdown("Enter your zodiac sign and I’ll match you with your perfect F1 boy 😍")
 
+# Footer
+st.markdown("---")
+st.caption("Built with 💖 by your AI pit crew – Powered by Streamlit")
